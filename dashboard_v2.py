@@ -32,27 +32,47 @@ DATA_CONFIG = {
 
 # ==================== 字体配置 ====================
 def setup_chinese_font():
+    # 1. 获取项目中的字体文件路径
+    font_path = os.path.join(os.path.dirname(__file__), "fonts", "SimHei.ttf")
+    
+    # 2. 如果字体文件存在，直接添加并使用
+    if os.path.exists(font_path):
+        fm.fontManager.addfont(font_path)
+        # 获取字体名称
+        font_prop = fm.FontProperties(fname=font_path)
+        font_name = font_prop.get_name()
+        
+        plt.rcParams['font.sans-serif'] = [font_name]
+        plt.rcParams['font.family'] = 'sans-serif'
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        print(f"✅ 使用字体: {font_name}")
+        return font_name
+    
+    # 3. 如果字体文件不存在，回退到系统字体
     available_fonts = [f.name for f in fm.fontManager.ttflist]
-
+    
     font_priority = [
         'Microsoft YaHei', 'Microsoft YaHei UI', 'SimHei',
         'PingFang SC', 'Heiti SC', 'STHeiti',
         'WenQuanYi Micro Hei', 'Noto Sans CJK SC',
         'Arial Unicode MS', 'DejaVu Sans'
     ]
-
+    
     selected_font = None
     for font in font_priority:
         if font in available_fonts:
             selected_font = font
             break
-
+    
     if selected_font is None:
         selected_font = 'DejaVu Sans'
-
+    
     plt.rcParams['font.sans-serif'] = [selected_font]
     plt.rcParams['font.family'] = 'sans-serif'
-
+    plt.rcParams['axes.unicode_minus'] = False
+    
+    print(f"⚠️ 使用系统字体: {selected_font}")
     return selected_font
 
 # ==================== 看板视觉风格（来自品牌配色方案） ====================
