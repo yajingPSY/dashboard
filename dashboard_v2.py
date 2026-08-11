@@ -33,7 +33,7 @@ DATA_CONFIG = {
 # ==================== 字体配置 ====================
 def setup_chinese_font():
     # 1. 获取项目中的字体文件路径
-    font_path = os.path.join(os.path.dirname(__file__), "fonts", "SimHei.ttf")
+    font_path = os.path.join(os.path.dirname(__file__), "fonts", "Simhei.ttf")
     
     # 2. 如果字体文件存在，直接添加并使用
     if os.path.exists(font_path):
