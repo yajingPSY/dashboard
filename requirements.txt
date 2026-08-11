@@ -1,9 +1,5 @@
 streamlit
 pandas
 matplotlib
-colorsys
 numpy
-os
 chardet
-re
-warnings
