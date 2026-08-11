@@ -26,8 +26,8 @@ st.set_page_config(
 # 在这里配置数据文件路径
 DATA_CONFIG = {
     'sales_path': "./DATA/7月商品销售汇总表.csv",  
-    'bom_path': "./DATA/单杯物料消耗明细.csv",  
-    'order_path':"./DATA/7月报货单明细.csv", 
+    'bom_path': "./DATA/单杯物料消耗明细.xlsx",  
+    'order_path':"./DATA/7月报货单明细.xlsx", 
 }
 
 # ==================== 字体配置 ====================
