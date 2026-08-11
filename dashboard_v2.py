@@ -25,9 +25,9 @@ st.set_page_config(
 # ==================== 数据文件路径配置 ====================
 # 在这里配置数据文件路径
 DATA_CONFIG = {
-    'sales_path': r'.\DATA\7月商品销售汇总表.csv',  
-    'bom_path': r'.\DATA\单杯物料消耗明细.xlsx',  
-    'order_path': r'.\DATA\7月报货单明细.xlsx', 
+    'sales_path': "./DATA/7月商品销售汇总表.csv",  
+    'bom_path': "./DATA/单杯物料消耗明细.csv",  
+    'order_path':"./DATA/7月报货单明细.csv", 
 }
 
 # ==================== 字体配置 ====================
@@ -581,7 +581,7 @@ def load_and_process_data(sales_path, bom_path, order_path):
     print("\n数据已保存到: 商品名称及做法未匹配数据.csv，需进一步核查")
     
     # 添加门店类型信息
-    data_type = pd.read_excel(r'C:\商品销售数据\DATA\门店类型信息.xlsx')
+    data_type = pd.read_excel("./DATA/门店类型信息.xlsx")
     data_type['门店编码'] = data_type['门店编码'].astype(str)
     data_type = data_type.drop_duplicates(subset=['门店编码', '门店名称'])
 
