@@ -33,7 +33,7 @@ DATA_CONFIG = {
 # ==================== 字体配置 ====================
 def setup_chinese_font():
     # 1. 获取项目中的字体文件路径
-    font_path = os.path.join(os.path.dirname(__file__), "fonts", "Simhei.ttf")
+    font_path = os.path.join(os.path.dirname(__file__), "fonts", "simhei.ttf")
     
     # 2. 如果字体文件存在，直接添加并使用
     if os.path.exists(font_path):
@@ -1877,9 +1877,29 @@ def main():
                             '总订货量', '总消耗量', '消耗量/订货量', '异常类型', '差异量绝对值']
             
             display_data = filtered[display_cols].copy()
-            display_data['消耗量/订货量'] = display_data['消耗量/订货量'].apply(
-                lambda x: '∞' if np.isinf(x) else round(x, 2)
-            )
+
+            def safe_format_ratio(x):
+                """安全格式化消耗量/订货量"""
+                if pd.isna(x):
+                    return 'N/A'
+                if np.isinf(x):
+                    return '∞'
+                if isinstance(x, str):
+                    try:
+                        val = float(x)
+                        if np.isinf(val):
+                            return '∞'
+                        return round(val, 2)
+                    except:
+                        return x
+                if isinstance(x, (int, float)):
+                    if np.isinf(x):
+                        return '∞'
+                    return round(x, 2)
+                return str(x)
+            
+            display_data['消耗量/订货量'] = display_data['消耗量/订货量'].apply(safe_format_ratio)
+
             
             st.dataframe(
                 display_data,
